@@ -1,0 +1,7 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/vj_cso/undertaker/mortician"
+	"$surfaceprop" "BloodyFlesh"
+	"$alphatest" 1
+	"$nolod" 1
+}

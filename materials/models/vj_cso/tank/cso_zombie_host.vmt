@@ -1,0 +1,7 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/vj_cso/tank/CSO_Zombie_host"
+	"$surfaceprop" "BloodyFlesh"
+	"$nolod" 1
+	"$alphatest" 1
+}

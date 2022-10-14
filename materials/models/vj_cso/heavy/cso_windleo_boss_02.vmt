@@ -1,0 +1,7 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/vj_cso/heavy/2"
+	"$surfaceprop" "BloodyFlesh"
+	"$translucent" 1
+	"$vertexcolor" 1
+}
