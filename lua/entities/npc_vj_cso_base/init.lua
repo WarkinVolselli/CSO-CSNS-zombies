@@ -10,6 +10,7 @@ ENT.Thrower = false
 ENT.Stronger = false
 ENT.Regen = false
 ENT.Toxic = false
+ENT.Stalker = false
 ENT.Origin = false
 
 ENT.AnimTbl_IdleStand = {ACT_IDLE}
@@ -199,41 +200,55 @@ end
 function ENT:CustomOnPreInitialize()
 
 if self.Origin == true then
-self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_origin_hp")
+--self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_origin_hp")
+self.StartHealth = self.StartHealth * 1.75
 end
 
 if math.random(1,GetConVar("vj_cso_walker_chance"):GetInt()) == 1 then
 self.Walker = true
-self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_walker_hp")
+--self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_walker_hp")
+self.StartHealth = self.StartHealth * 2
 self.AnimTbl_Walk = {ACT_WALK}
 self.AnimTbl_Run = {ACT_WALK}
 end
 
-if math.random(1,GetConVar("vj_cso_thrower_chance"):GetInt()) == 1 && self.Stronger == false && self.Regen == false && self.Toxic == false then
+if math.random(1,GetConVar("vj_cso_thrower_chance"):GetInt()) == 1 && self.Stronger == false && self.Regen == false && self.Toxic == false && self.Stalker == false then
 self.Thrower = true 
 self:SetKeyValue("rendercolor","155 255 155 255")
-self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_thrower_hp")
+--self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_thrower_hp")
+self.StartHealth = self.StartHealth * 0.75
 self.HasRangeAttack = true
 end
 
-if math.random(1,GetConVar("vj_cso_stronger_chance"):GetInt()) == 1 && self.Thrower == false && self.Regen == false && self.Toxic == false then
+if math.random(1,GetConVar("vj_cso_stronger_chance"):GetInt()) == 1 && self.Thrower == false && self.Regen == false && self.Toxic == false && self.Stalker == false then
 self.Stronger = true
 self:SetKeyValue("rendercolor","255 155 0 255")
-self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_stronger_hp")
+--self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_stronger_hp")
+self.StartHealth = self.StartHealth * 2
 end
 
-if math.random(1,GetConVar("vj_cso_regen_chance"):GetInt()) == 1 && self.Stronger == false && self.Thrower == false && self.Toxic == false then
+if math.random(1,GetConVar("vj_cso_regen_chance"):GetInt()) == 1 && self.Stronger == false && self.Thrower == false && self.Toxic == false && self.Stalker == false then
 self.Regen = true
 self:SetKeyValue("rendercolor","155 155 255 255")
-self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_regen_hp")
+--self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_regen_hp")
+self.StartHealth = self.StartHealth * 1.5
 self.HasHealthRegeneration = true
 end
 
-if math.random(1,GetConVar("vj_cso_toxic_chance"):GetInt()) == 1 && self.Stronger == false && self.Thrower == false && self.Regen == false then
+if math.random(1,GetConVar("vj_cso_toxic_chance"):GetInt()) == 1 && self.Stronger == false && self.Thrower == false && self.Regen == false && self.Stalker == false then
 self.Toxic = true
 self:SetKeyValue("rendercolor","255 155 255 255")
-self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_toxic_hp")
+--self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_toxic_hp")
+self.StartHealth = self.StartHealth * 1.25
 self.MeleeAttackBleedEnemy = true
+end
+
+if math.random(1,GetConVar("vj_cso_stalker_chance"):GetInt()) == 1 && self.Stronger == false && self.Thrower == false && self.Regen == false && self.Toxic == false then
+self.Stalker = true
+self:SetKeyValue("rendercolor","50 50 50 255")
+--self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_stalker_hp")
+self.StartHealth = self.StartHealth * 0.5
+self:SetRenderFX(kRenderFxHologram)
 end
 
 self:Zombie_CustomOnPreInitialize()
