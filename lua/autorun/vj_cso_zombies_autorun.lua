@@ -99,10 +99,14 @@ if VJExists == true then
 	VJ.AddConVar("vj_cso_thrower_chance", 10, {FCVAR_ARCHIVE})
 	VJ.AddConVar("vj_cso_stronger_chance", 10, {FCVAR_ARCHIVE})
 	VJ.AddConVar("vj_cso_walker_chance", 5, {FCVAR_ARCHIVE})
+	VJ.AddConVar("vj_cso_regen_chance", 10, {FCVAR_ARCHIVE})
+	VJ.AddConVar("vj_cso_toxic_chance", 10, {FCVAR_ARCHIVE})
 	
 	VJ.AddConVar("vj_cso_thrower_enable", 1, {FCVAR_ARCHIVE})
 	VJ.AddConVar("vj_cso_stronger_enable", 1, {FCVAR_ARCHIVE})
 	VJ.AddConVar("vj_cso_walker_enable", 1, {FCVAR_ARCHIVE})
+	VJ.AddConVar("vj_cso_regen_enable", 1, {FCVAR_ARCHIVE})
+	VJ.AddConVar("vj_cso_toxic_enable", 1, {FCVAR_ARCHIVE})
 	
 	-- Stats --
 
@@ -111,6 +115,8 @@ if VJExists == true then
 	VJ.AddConVar("vj_cso_thrower_hp",0.75, {FCVAR_ARCHIVE})
 	VJ.AddConVar("vj_cso_stronger_hp",2, {FCVAR_ARCHIVE})
 	VJ.AddConVar("vj_cso_walker_hp",2, {FCVAR_ARCHIVE})
+	VJ.AddConVar("vj_cso_regen_hp",1.5, {FCVAR_ARCHIVE})
+	VJ.AddConVar("vj_cso_toxic_hp",1.25, {FCVAR_ARCHIVE})
 
 	VJ.AddConVar("vj_cso_regular_hp",200)
 	VJ.AddConVar("vj_cso_light_hp",100)
@@ -149,10 +155,14 @@ if VJExists == true then
 			vj_cso_thrower_enable = "1",
 			vj_cso_stronger_enable = "1",
 			vj_cso_walker_enable = "1",
+			vj_cso_regen_enable = "1",
+			vj_cso_toxic_enable = "1",
 			vj_cso_origin_hp = "1.75",
 			vj_cso_thrower_hp = "0.75",
 			vj_cso_stronger_hp = "2",
 			vj_cso_walker_hp = "2",
+			vj_cso_regen_hp = "1.5",
+			vj_cso_toxic_hp = "1.25",
 			vj_cso_regular_hp = "200",
 			vj_cso_light_hp = "100",
 			vj_cso_heavy_hp = "300",
@@ -178,18 +188,26 @@ if VJExists == true then
 	Panel:ControlHelp("Walkers, well, walk. They also have more hp.")
 
 	
+	Panel:AddControl("Slider", {Label = "Walker chance", Command = vj_cso_walker_chance"", Min = 0, Max = 100})
+	Panel:ControlHelp("Example: Setting it to 5 will make it a 1 in 5 chance.")
+	Panel:ControlHelp("Chance that a zombie will spawn as a walker.")
+	Panel:ControlHelp("Default is 5")
+	
 	Panel:AddControl("Slider", {Label = "Bomber Chance", Command = "vj_cso_thrower_chance", Min = 0, Max = 100})
 	Panel:ControlHelp("Chance that a zombie will spawn as a Bomber.")
-	Panel:ControlHelp("Example: Setting it to 5 will make it a 1 in 5 chance.")
 	Panel:ControlHelp("Default is 10")
 	
 	Panel:AddControl("Slider", {Label = "Enhanced Chance", Command = "vj_cso_stronger_chance", Min = 0, Max = 100})
-	Panel:ControlHelp("Chance that a zombie will spawn as an enhanced.")
+	Panel:ControlHelp("Chance that a zombie will spawn as an Enhanced.")
 	Panel:ControlHelp("Default is 10")
 	
-	Panel:AddControl("Slider", {Label = "Walker chance", Command = vj_cso_walker_chance"", Min = 0, Max = 100})
-	Panel:ControlHelp("Chance that a zombie will spawn as a walker.")
-	Panel:ControlHelp("Default is 5")
+	Panel:AddControl("Slider", {Label = "Regenerator Chance", Command = "vj_cso_regen_chance", Min = 0, Max = 100})
+	Panel:ControlHelp("Chance that a zombie will spawn as a Regenerator.")
+	Panel:ControlHelp("Default is 10")
+	
+	Panel:AddControl("Slider", {Label = "Toxic Chance", Command = "vj_cso_toxic_chance", Min = 0, Max = 100})
+	Panel:ControlHelp("Chance that a zombie will spawn as a Toxic.")
+	Panel:ControlHelp("Default is 10")
 	
 	Panel:AddControl("Slider", {Label = "Origin HP multiplier.", Command = "vj_cso_origin_hp", Min = 0.1, Max = 10})
 	Panel:ControlHelp("Default multiplier is 1.75")
@@ -198,14 +216,20 @@ if VJExists == true then
 	Panel:ControlHelp("0.5 = About half their HP added on as bonus health")
 	Panel:ControlHelp("10 = 1000% increase")
 	
+	Panel:AddControl("Slider", {Label = "Walker HP multiplier.", Command = "vj_cso_walker_hp", Min = 0.1, Max = 10})
+	Panel:ControlHelp("Default multiplier is 2")
+	
 	Panel:AddControl("Slider", {Label = "Bomber HP multiplier.", Command = "vj_cso_thrower_hp", Min = 0.1, Max = 10})
 	Panel:ControlHelp("Default multiplier is 0.75")
 	
 	Panel:AddControl("Slider", {Label = "Enhanced HP multiplier.", Command = "vj_cso_stronger_hp", Min = 0.1, Max = 10})
 	Panel:ControlHelp("Default multiplier is 2")
+
+	Panel:AddControl("Slider", {Label = "Regenerator HP multiplier.", Command = "vj_cso_regen_hp", Min = 0.1, Max = 10})
+	Panel:ControlHelp("Default multiplier is 1.5")
 	
-	Panel:AddControl("Slider", {Label = "Walker HP multiplier.", Command = "vj_cso_walker_hp", Min = 0.1, Max = 10})
-	Panel:ControlHelp("Default multiplier is 2")
+	Panel:AddControl("Slider", {Label = "Toxic HP multiplier.", Command = "vj_cso_toxic_hp", Min = 0.1, Max = 10})
+	Panel:ControlHelp("Default multiplier is 1.25")
 	
 	Panel:AddControl( "Label", {Text = "MAP WILL REQUIRE RESTART IF CHANGING NPC STATS"})	
 	
