@@ -96,40 +96,34 @@ if VJExists == true then
 	
 	-- ConVars --
 	
-	VJ.AddConVar("vj_cso_thrower_chance", 10, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_stronger_chance", 10, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_walker_chance", 5, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_regen_chance", 10, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_toxic_chance", 10, {FCVAR_ARCHIVE})
-	
-	VJ.AddConVar("vj_cso_thrower_enable", 1, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_stronger_enable", 1, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_walker_enable", 1, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_regen_enable", 1, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_toxic_enable", 1, {FCVAR_ARCHIVE})
-	
-	-- Stats --
-
-	VJ.AddConVar("vj_cso_origin_hp",1.75, {FCVAR_ARCHIVE})
-	
-	VJ.AddConVar("vj_cso_thrower_hp",0.75, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_stronger_hp",2, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_walker_hp",2, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_regen_hp",1.5, {FCVAR_ARCHIVE})
-	VJ.AddConVar("vj_cso_toxic_hp",1.25, {FCVAR_ARCHIVE})
-
-	VJ.AddConVar("vj_cso_regular_hp",200)
-	VJ.AddConVar("vj_cso_light_hp",100)
-	VJ.AddConVar("vj_cso_heavy_hp",300)
-	VJ.AddConVar("vj_cso_psycho_hp",200)
-	VJ.AddConVar("vj_cso_voodoo_hp",150)
-	VJ.AddConVar("vj_cso_resident_hp",200)
-	VJ.AddConVar("vj_cso_boomer_hp",400)
-	VJ.AddConVar("vj_cso_undertaker_hp",300)
-	VJ.AddConVar("vj_cso_deimos_hp",800)
-	
-	VJ.AddConVar("vj_cso_juggernaut_hp",4000)
-	VJ.AddConVar("vj_cso_ganymede_hp",3000)
+	local AddConvars = {}
+	AddConvars["vj_cso_thrower_chance"] = 10
+	AddConvars["vj_cso_stronger_chance"] = 10
+	AddConvars["vj_cso_walker_chance"] = 5
+	AddConvars["vj_cso_regen_chance"] = 10
+	AddConvars["vj_cso_toxic_chance"] = 10
+	AddConvars["vj_cso_thrower_enable"] = 1
+	AddConvars["vj_cso_stronger_enable"] = 1
+	AddConvars["vj_cso_walker_enable"] = 1
+	AddConvars["vj_cso_regen_enable"] = 1
+	AddConvars["vj_cso_toxic_enable"] = 1
+	AddConvars["vj_cso_origin_hp"] = 1.75
+	AddConvars["vj_cso_thrower_hp"] = 0.75
+	AddConvars["vj_cso_stronger_hp"] = 2
+	AddConvars["vj_cso_walker_hp"] = 2
+	AddConvars["vj_cso_regen_hp"] = 1.5
+	AddConvars["vj_cso_toxic_hp"] = 1.25
+	AddConvars["vj_cso_regular_hp"] = 200
+	AddConvars["vj_cso_light_hp"] = 100
+	AddConvars["vj_cso_heavy_hp"] = 300
+	AddConvars["vj_cso_psycho_hp"] = 200
+	AddConvars["vj_cso_voodoo_hp"] = 150
+	AddConvars["vj_cso_resident_hp"] = 200
+	AddConvars["vj_cso_boomer_hp"] = 400
+	AddConvars["vj_cso_undertaker_hp"] = 300
+	AddConvars["vj_cso_deimos_hp"] = 800
+	AddConvars["vj_cso_juggernaut_hp"] = 3500
+	AddConvars["vj_cso_ganymede_hp"] = 3000
 	
     -- Config menu --
 
@@ -152,6 +146,8 @@ if VJExists == true then
 			vj_cso_thrower_chance = "10",
 			vj_cso_stronger_chance = "10",
 			vj_cso_walker_chance = "5",
+			vj_cso_regen_chance = "10",
+			vj_cso_toxic_chance = "10",
 			vj_cso_thrower_enable = "1",
 			vj_cso_stronger_enable = "1",
 			vj_cso_walker_enable = "1",
@@ -177,18 +173,24 @@ if VJExists == true then
 			}
 		
 	Panel:AddControl("ComboBox", vj_resetbutton)
+--[[	
+	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as Bombers?", Command = "vj_cso_thrower_enable"})
+	Panel:ControlHelp("Bombers throw zombie grenades.")
 	
-	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as throwers?", Command = "vj_cso_thrower_enable"})
-	Panel:ControlHelp("Throwers throw exploding heads at you.")
-	
-	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as enhanced?", Command = "vj_cso_stronger_enable"})
+	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as Enhanced?", Command = "vj_cso_stronger_enable"})
 	Panel:ControlHelp("Enhanced have more health.")
 
-	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as walkers?", Command = "vj_cso_walker_enable"})
-	Panel:ControlHelp("Walkers, well, walk. They also have more hp.")
-
+	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as Walkers?", Command = "vj_cso_walker_enable"})
+	Panel:ControlHelp("Walkers are slower and tankier.")
 	
-	Panel:AddControl("Slider", {Label = "Walker chance", Command = vj_cso_walker_chance"", Min = 0, Max = 100})
+	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as Regenerators?", Command = "vj_cso_regen_enable"})
+	Panel:ControlHelp("Regenerators heal over time.")
+	
+	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as Toxics?", Command = "vj_cso_toxic_enable"})
+	Panel:ControlHelp("Toxics deal damage over time.")
+--]]
+	
+	Panel:AddControl("Slider", {Label = "Walker chance", Command = "vj_cso_walker_chance", Min = 0, Max = 100})
 	Panel:ControlHelp("Example: Setting it to 5 will make it a 1 in 5 chance.")
 	Panel:ControlHelp("Chance that a zombie will spawn as a walker.")
 	Panel:ControlHelp("Default is 5")
