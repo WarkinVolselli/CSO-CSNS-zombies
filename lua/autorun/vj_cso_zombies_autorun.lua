@@ -125,6 +125,147 @@ if VJExists == true then
 	VJ.AddConVar("vj_cso_juggernaut_hp",4000)
 	VJ.AddConVar("vj_cso_ganymede_hp",3000)
 	
+    -- Config menu --
+
+	for k, v in pairs(AddConvars) do
+		if !ConVarExists( k ) then CreateConVar( k, v, {FCVAR_ARCHIVE} ) end
+	end
+	
+	if (CLIENT) then
+		local function VJ_CSO(Panel)
+			if !game.SinglePlayer() then
+			if !LocalPlayer():IsAdmin() or !LocalPlayer():IsSuperAdmin() then
+				Panel:AddControl( "Label", {Text = "You are not an admin!"})
+				Panel:ControlHelp("Note: Only admins can change these settings!")
+			return
+		end
+	end
+		Panel:AddControl( "Label", {Text = "Note: Only admins can change these settings!"})
+	local vj_resetbutton = {Options = {}, CVars = {}, Label = "Reset Everything:", MenuButton = "0"}
+		vj_resetbutton.Options["#vjbase.menugeneral.default"] = { 
+			vj_cso_thrower_chance = "10",
+			vj_cso_stronger_chance = "10",
+			vj_cso_walker_chance = "5",
+			vj_cso_thrower_enable = "1",
+			vj_cso_stronger_enable = "1",
+			vj_cso_walker_enable = "1",
+			vj_cso_origin_hp = "1.75",
+			vj_cso_thrower_hp = "0.75",
+			vj_cso_stronger_hp = "2",
+			vj_cso_walker_hp = "2",
+			vj_cso_regular_hp = "200",
+			vj_cso_light_hp = "100",
+			vj_cso_heavy_hp = "300",
+			vj_cso_psycho_hp = "200",
+			vj_cso_voodoo_hp = "150",
+			vj_cso_resident_hp = "200",
+			vj_cso_boomer_hp = "400",
+			vj_cso_undertaker_hp = "300",
+			vj_cso_deimos_hp = "800",
+			vj_cso_juggernaut_hp = "4000",
+			vj_cso_ganymede_hp = "3000",
+			}
+		
+	Panel:AddControl("ComboBox", vj_resetbutton)
+	
+	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as throwers?", Command = "vj_cso_thrower_enable"})
+	Panel:ControlHelp("Throwers throw exploding heads at you.")
+	
+	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as enhanced?", Command = "vj_cso_stronger_enable"})
+	Panel:ControlHelp("Enhanced have more health.")
+
+	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as walkers?", Command = "vj_cso_walker_enable"})
+	Panel:ControlHelp("Walkers, well, walk. They also have more hp.")
+
+	
+	Panel:AddControl("Slider", {Label = "Bomber Chance", Command = "vj_cso_thrower_chance", Min = 0, Max = 100})
+	Panel:ControlHelp("Chance that a zombie will spawn as a Bomber.")
+	Panel:ControlHelp("Example: Setting it to 5 will make it a 1 in 5 chance.")
+	Panel:ControlHelp("Default is 10")
+	
+	Panel:AddControl("Slider", {Label = "Enhanced Chance", Command = "vj_cso_stronger_chance", Min = 0, Max = 100})
+	Panel:ControlHelp("Chance that a zombie will spawn as an enhanced.")
+	Panel:ControlHelp("Default is 10")
+	
+	Panel:AddControl("Slider", {Label = "Walker chance", Command = vj_cso_walker_chance"", Min = 0, Max = 100})
+	Panel:ControlHelp("Chance that a zombie will spawn as a walker.")
+	Panel:ControlHelp("Default is 5")
+	
+	Panel:AddControl("Slider", {Label = "Origin HP multiplier.", Command = "vj_cso_origin_hp", Min = 0.1, Max = 10})
+	Panel:ControlHelp("Default multiplier is 1.75")
+	Panel:ControlHelp("Examples:")
+	Panel:ControlHelp("2 = 2 Times/Twice the HP")
+	Panel:ControlHelp("0.5 = About half their HP added on as bonus health")
+	Panel:ControlHelp("10 = 1000% increase")
+	
+	Panel:AddControl("Slider", {Label = "Bomber HP multiplier.", Command = "vj_cso_thrower_hp", Min = 0.1, Max = 10})
+	Panel:ControlHelp("Default multiplier is 0.75")
+	
+	Panel:AddControl("Slider", {Label = "Enhanced HP multiplier.", Command = "vj_cso_stronger_hp", Min = 0.1, Max = 10})
+	Panel:ControlHelp("Default multiplier is 2")
+	
+	Panel:AddControl("Slider", {Label = "Walker HP multiplier.", Command = "vj_cso_walker_hp", Min = 0.1, Max = 10})
+	Panel:ControlHelp("Default multiplier is 2")
+	
+	Panel:AddControl( "Label", {Text = "MAP WILL REQUIRE RESTART IF CHANGING NPC STATS"})	
+	
+	Panel:AddControl("Slider", {Label = "Regular HP.", Command = "vj_cso_regular_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 200.")
+	
+	Panel:AddControl("Slider", {Label = "Light HP.", Command = "vj_cso_light_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 100.")
+	
+	Panel:AddControl("Slider", {Label = "Heavy HP.", Command = "vj_cso_heavy_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 300.")
+	
+	Panel:AddControl("Slider", {Label = "Psycho HP.", Command = "vj_cso_psycho_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 200.")
+	
+	Panel:AddControl("Slider", {Label = "Voodoo Healer HP.", Command = "vj_cso_voodoo_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 150.")
+	
+	Panel:AddControl("Slider", {Label = "Venom Stinger HP.", Command = "vj_cso_resident_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 200.")
+	
+	Panel:AddControl("Slider", {Label = "Venom Guard HP.", Command = "vj_cso_boomer_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 400.")
+	
+	Panel:AddControl("Slider", {Label = "Stamper HP.", Command = "vj_cso_undertaker_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 300.")
+	
+	Panel:AddControl("Slider", {Label = "Deimos HP.", Command = "vj_cso_deimos_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 800.")
+	
+	Panel:AddControl("Slider", {Label = "Juggernaut HP.", Command = "vj_cso_juggernaut_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 4000.")
+
+	Panel:AddControl("Slider", {Label = "Ganymede HP.", Command = "vj_cso_ganymede_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 3000.")	
+	
+	/*
+	examples
+	
+	Panel:AddControl("Checkbox", {Label = "", Command = ""})
+	
+	Panel:AddControl("Slider", {Label = "", Command = "", Min = 0, Max = 100})
+
+	local example_combobox = {Options = {}, CVars = {}, Label = "", MenuButton = "0"}
+	example_combobox.Options["Default"] = {convar_name = 1}
+	example_combobox.Options["Option 1"] = {convar_name = 2}
+	example_combobox.Options["Option 2"] = {convar_name = 3}
+	Panel:AddControl("ComboBox", example_combobox)
+	
+	Panel:ControlHelp("")
+	
+	*/
+	
+	end
+
+	function VJ_AddToMenu_CSO(Panel)
+		spawnmenu.AddToolMenuOption("DrVrej","SNPC Configures","Counter-Strike: Online","Counter-Strike: Online","","", VJ_CSO, {} )
+	end
+		hook.Add("PopulateToolMenu","VJ_AddToMenu_CSO", VJ_AddToMenu_CSO )
+	end
 -- !!!!!! DON'T TOUCH ANYTHING BELOW THIS !!!!!! -------------------------------------------------------------------------------------------------------------------------
 	AddCSLuaFile(AutorunFile)
 	VJ.AddAddonProperty(AddonName,AddonType)
