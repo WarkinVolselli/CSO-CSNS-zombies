@@ -102,17 +102,20 @@ if VJExists == true then
 	AddConvars["vj_cso_walker_chance"] = 5
 	AddConvars["vj_cso_regen_chance"] = 10
 	AddConvars["vj_cso_toxic_chance"] = 10
+	AddConvars["vj_cso_stalker_chance"] = 10
 	AddConvars["vj_cso_thrower_enable"] = 1
 	AddConvars["vj_cso_stronger_enable"] = 1
 	AddConvars["vj_cso_walker_enable"] = 1
 	AddConvars["vj_cso_regen_enable"] = 1
 	AddConvars["vj_cso_toxic_enable"] = 1
+	AddConvars["vj_cso_stalker_enable"] = 1
 	AddConvars["vj_cso_origin_hp"] = 1.75
 	AddConvars["vj_cso_thrower_hp"] = 0.75
 	AddConvars["vj_cso_stronger_hp"] = 2
 	AddConvars["vj_cso_walker_hp"] = 2
 	AddConvars["vj_cso_regen_hp"] = 1.5
 	AddConvars["vj_cso_toxic_hp"] = 1.25
+	AddConvars["vj_cso_stalker_hp"] = 0.5
 	AddConvars["vj_cso_regular_hp"] = 200
 	AddConvars["vj_cso_light_hp"] = 100
 	AddConvars["vj_cso_heavy_hp"] = 300
@@ -148,17 +151,20 @@ if VJExists == true then
 			vj_cso_walker_chance = "5",
 			vj_cso_regen_chance = "10",
 			vj_cso_toxic_chance = "10",
+			vj_cso_stalker_chance = "1",
 			vj_cso_thrower_enable = "1",
 			vj_cso_stronger_enable = "1",
 			vj_cso_walker_enable = "1",
 			vj_cso_regen_enable = "1",
 			vj_cso_toxic_enable = "1",
+			vj_cso_stalker_enable = "1",
 			vj_cso_origin_hp = "1.75",
 			vj_cso_thrower_hp = "0.75",
 			vj_cso_stronger_hp = "2",
 			vj_cso_walker_hp = "2",
 			vj_cso_regen_hp = "1.5",
 			vj_cso_toxic_hp = "1.25",
+			vj_cso_toxic_hp = "0.5",
 			vj_cso_regular_hp = "200",
 			vj_cso_light_hp = "100",
 			vj_cso_heavy_hp = "300",
@@ -188,6 +194,9 @@ if VJExists == true then
 	
 	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as Toxics?", Command = "vj_cso_toxic_enable"})
 	Panel:ControlHelp("Toxics deal damage over time.")
+	
+	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as Stalker?", Command = "vj_cso_stalker_enable"})
+	Panel:ControlHelp("Stalkers are harder to see.")
 --]]
 	
 	Panel:AddControl("Slider", {Label = "Walker chance", Command = "vj_cso_walker_chance", Min = 0, Max = 100})
@@ -211,6 +220,10 @@ if VJExists == true then
 	Panel:ControlHelp("Chance that a zombie will spawn as a Toxic.")
 	Panel:ControlHelp("Default is 10")
 	
+	Panel:AddControl("Slider", {Label = "Stalker Chance", Command = "vj_cso_stalker_chance", Min = 0, Max = 100})
+	Panel:ControlHelp("Chance that a zombie will spawn as a Stalker.")
+	Panel:ControlHelp("Default is 10")
+	
 	Panel:AddControl("Slider", {Label = "Origin HP multiplier.", Command = "vj_cso_origin_hp", Min = 0.1, Max = 10})
 	Panel:ControlHelp("Default multiplier is 1.75")
 	Panel:ControlHelp("Examples:")
@@ -232,6 +245,9 @@ if VJExists == true then
 	
 	Panel:AddControl("Slider", {Label = "Toxic HP multiplier.", Command = "vj_cso_toxic_hp", Min = 0.1, Max = 10})
 	Panel:ControlHelp("Default multiplier is 1.25")
+	
+	Panel:AddControl("Slider", {Label = "Stalker HP multiplier.", Command = "vj_cso_stalker_hp", Min = 0.1, Max = 10})
+	Panel:ControlHelp("Default multiplier is 0.5")
 	
 	Panel:AddControl( "Label", {Text = "MAP WILL REQUIRE RESTART IF CHANGING NPC STATS"})	
 	
