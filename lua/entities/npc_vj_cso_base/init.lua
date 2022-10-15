@@ -8,17 +8,30 @@ ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
 ENT.Walker = false
 ENT.Thrower = false
 ENT.Stronger = false
+ENT.Regen = false
+ENT.Toxic = false
 ENT.Origin = false
 
 ENT.AnimTbl_IdleStand = {ACT_IDLE}
 ENT.AnimTbl_Walk = {ACT_WALK}
 ENT.AnimTbl_Run = {ACT_RUN}
 
+ENT.HasHealthRegeneration = false
+ENT.HealthRegenerationAmount = math.random(10,20)
+ENT.HealthRegenerationDelay = VJ_Set(1, 2)
+ENT.HealthRegenerationResetOnDmg = true
+
 ENT.AnimTbl_MeleeAttack = {"vjges_zbs_attack"}
 ENT.MeleeAttackDamage = math.random(10,20)
 ENT.MeleeAttackDamageType = DMG_SLASH
 ENT.MeleeAttackAnimationAllowOtherTasks = true
 ENT.TimeUntilMeleeAttackDamage = false
+
+ENT.MeleeAttackBleedEnemy = false
+ENT.MeleeAttackBleedEnemyChance = 1
+ENT.MeleeAttackBleedEnemyDamage = math.random(1,2)
+ENT.MeleeAttackBleedEnemyTime = math.random(1,2)
+ENT.MeleeAttackBleedEnemyReps = math.random(4,8)
 
 ENT.HasRangeAttack = false
 ENT.AnimTbl_RangeAttack = {"vjges_zbs_shoot_grenade_idle1"}
@@ -196,21 +209,31 @@ self.AnimTbl_Walk = {ACT_WALK}
 self.AnimTbl_Run = {ACT_WALK}
 end
 
-if math.random(1,GetConVar("vj_cso_thrower_chance"):GetInt()) == 1 && self.Stronger == false then
+if math.random(1,GetConVar("vj_cso_thrower_chance"):GetInt()) == 1 && self.Stronger == false && self.Regen == false && self.Toxic == false then
 self.Thrower = true 
 self:SetKeyValue("rendercolor","155 255 155 255")
 self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_thrower_hp")
 self.HasRangeAttack = true
-self.GeneralSoundPitch1 = 110
-self.GeneralSoundPitch2 = 100
 end
 
-if math.random(1,GetConVar("vj_cso_stronger_chance"):GetInt()) == 1 && self.Thrower == false then
+if math.random(1,GetConVar("vj_cso_stronger_chance"):GetInt()) == 1 && self.Thrower == false && self.Regen == false && self.Toxic == false then
 self.Stronger = true
 self:SetKeyValue("rendercolor","255 155 0 255")
 self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_stronger_hp")
-self.GeneralSoundPitch1 = 90
-self.GeneralSoundPitch2 = 80
+end
+
+if math.random(1,GetConVar("vj_cso_regen_chance"):GetInt()) == 1 && self.Stronger == false && self.Thrower == false && self.Toxic == false then
+self.Regen = true
+self:SetKeyValue("rendercolor","155 155 255 255")
+self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_regen_hp")
+self.HasHealthRegeneration = true
+end
+
+if math.random(1,GetConVar("vj_cso_toxic_chance"):GetInt()) == 1 && self.Stronger == false && self.Thrower == false && self.Regen == false then
+self.Toxic = true
+self:SetKeyValue("rendercolor","255 155 255 255")
+self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_toxic_hp")
+self.MeleeAttackBleedEnemy = true
 end
 
 self:Zombie_CustomOnPreInitialize()
