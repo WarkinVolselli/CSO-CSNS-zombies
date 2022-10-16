@@ -12,6 +12,9 @@ function ENT:CustomOnThink()
     if IsValid(self:GetEnemy()) && math.random(1,50) == 1 && self.Berserk == false && self.VJ_IsBeingControlled == false && CurTime() > self.NextBerserk && (self:Health() > (0)) then
 		        self.Berserk = true 
 				self.AnimTbl_Run = {ACT_RUN_AGITATED}
+				if self.Walker == true then
+				self.AnimTbl_Run = {ACT_RUN}
+				end
 			    self:PlaySoundSystem("Alert")
 			    self:SetKeyValue("rendercolor","255 100 100 255")
 		   timer.Simple(8,function() if IsValid(self) then
@@ -34,7 +37,10 @@ function ENT:CustomOnThink()
 			    self:SetKeyValue("rendercolor","255 155 255 255")
 				end
 				if self.Stalker == true then 
-			    self:SetKeyValue("rendercolor","50 50 50 255")
+			    self:SetKeyValue("rendercolor","50 50 50 150")
+				end
+				if self.Walker == true then
+				self.AnimTbl_Run = {ACT_WALK}
 				end
     end 
 	end)
@@ -63,6 +69,6 @@ function ENT:CustomOnDeath_BeforeCorpseSpawned(dmginfo, hitgroup)
 			    self:SetKeyValue("rendercolor","255 155 255 255")
 				end
 				if self.Stalker == true then 
-			    self:SetKeyValue("rendercolor","50 50 50 255")
+			    self:SetKeyValue("rendercolor","50 50 50 150")
 				end
 end

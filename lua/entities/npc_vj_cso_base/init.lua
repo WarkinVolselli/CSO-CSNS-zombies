@@ -247,7 +247,7 @@ end
 
 if math.random(1,GetConVar("vj_cso_stalker_chance"):GetInt()) == 1 && self.Stronger == false && self.Thrower == false && self.Regen == false && self.Toxic == false then
 self.Stalker = true
-self:SetKeyValue("rendercolor","50 50 50 255")
+self:SetKeyValue("rendercolor","50 50 50 200")
 --self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_stalker_hp")
 self.StartHealth = self.StartHealth * 0.5
 self:SetRenderFX(kRenderFxHologram)
