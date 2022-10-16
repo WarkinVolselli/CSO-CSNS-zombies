@@ -2,6 +2,6 @@
 {
 	"$basetexture" "models/vj_cso/heavy/1"
 	"$surfaceprop" "BloodyFlesh"
-	"$translucent" 1
+	"$alphatest" 1
 	"$vertexcolor" 1
 }

@@ -2,6 +2,6 @@
 {
 	"$basetexture" "models/vj_cso/heavy/NEXON_CSO_heavy_zombi_origin00"
 	"$surfaceprop" "BloodyFlesh"
-	"$translucent" 1
+	"$alphatest" 1
 	"$vertexcolor" 1
 }
