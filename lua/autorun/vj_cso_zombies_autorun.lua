@@ -171,7 +171,7 @@ if VJExists == true then
 			vj_cso_walker_hp = "2",
 			vj_cso_regen_hp = "1.5",
 			vj_cso_toxic_hp = "1.25",
-			vj_cso_toxic_hp = "0.5",
+			vj_cso_stalker_hp = "0.5",
 			vj_cso_regular_hp = "200",
 			vj_cso_light_hp = "100",
 			vj_cso_heavy_hp = "300",
