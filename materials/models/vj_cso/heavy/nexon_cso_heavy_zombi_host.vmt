@@ -1,6 +1,7 @@
 "VertexlitGeneric"
 {
 	"$basetexture" "models/vj_cso/heavy/NEXON_CSO_heavy_zombi_Host"
+	"$bumpmap" "models/vj_cso/heavy/NEXON_CSO_heavy_zombi_Host_normal"
 	"$surfaceprop" "BloodyFlesh"
 	"$alphatest" 1
 	"$vertexcolor" 1

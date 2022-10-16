@@ -1,6 +1,7 @@
 "VertexlitGeneric"
 {
 	"$basetexture" "models/vj_cso/boomer/boomer_zombie"
+	"$bumpmap" "models/vj_cso/boomer/boomer_zombie_normal"
 	"$surfaceprop" "BloodyFlesh"
 	"$alphatest" 1
 	"$vertexcolor" 1

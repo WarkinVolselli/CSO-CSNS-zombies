@@ -1,6 +1,7 @@
 "VertexlitGeneric"
 {
 	"$basetexture" "models/vj_cso/light/Speed_zombi_origin_ver2"
+	"$bumpmap" "models/vj_cso/light/Speed_zombi_origin_ver2_normal"
 	"$surfaceprop" "BloodyFlesh"
 	"$alphatest" 1
 	"$vertexcolor" 1

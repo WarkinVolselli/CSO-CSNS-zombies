@@ -1,6 +1,7 @@
 "VertexlitGeneric"
 {
 	"$basetexture" "models/vj_cso/heavy/1"
+	"$bumpmap" "models/vj_cso/heavy/1_normal"
 	"$surfaceprop" "BloodyFlesh"
 	"$alphatest" 1
 	"$vertexcolor" 1

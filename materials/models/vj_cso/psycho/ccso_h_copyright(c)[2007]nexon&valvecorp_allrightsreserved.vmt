@@ -1,6 +1,7 @@
 "VertexlitGeneric"
 {
 	"$basetexture" "models/vj_cso/psycho/CCSO_H_Copyright(C)[2007]NEXON&ValveCorp_AllRightsReserved"
+	"$bumpmap" "models/vj_cso/psycho/CCSO_H_Copyright(C)[2007]NEXON&ValveCorp_AllRightsReserved_normal"
 	"$surfaceprop" "BloodyFlesh"
 	"$alphatest" 1
 	"$vertexcolor" 1

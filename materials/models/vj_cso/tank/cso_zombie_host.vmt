@@ -1,6 +1,7 @@
 "VertexlitGeneric"
 {
 	"$basetexture" "models/vj_cso/tank/CSO_Zombie_host"
+	"$bumpmap" "models/vj_cso/tank/CSO_Zombie_host_normal"
 	"$surfaceprop" "BloodyFlesh"
 	"$vertexcolor" 1
 	"$alphatest" 1

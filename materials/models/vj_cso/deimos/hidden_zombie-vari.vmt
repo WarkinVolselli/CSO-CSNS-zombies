@@ -1,6 +1,7 @@
 "VertexlitGeneric"
 {
 	"$basetexture" "models/vj_cso/deimos/hidden_zombie-vari"
+	"$bumpmap" "models/vj_cso/deimos/hidden_zombie_index_normal"
 	"$surfaceprop" "BloodyFlesh"
 	"$alphatest" 1
 	"$vertexcolor" 1

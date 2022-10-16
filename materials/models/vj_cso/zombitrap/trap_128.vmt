@@ -1,6 +1,7 @@
 "VertexlitGeneric"
 {
 	"$basetexture" "models/vj_cso/zombitrap/Trap_128"
+	"$bumpmap" "models/vj_cso/zombitrap/Trap_128_normal"
 	"$surfaceprop" "BloodyFlesh"
 	"$vertexcolor" 1
 }
