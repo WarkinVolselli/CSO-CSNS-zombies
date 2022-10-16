@@ -1,0 +1,7 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/vj_cso/parcour/51zombie1"
+	"$surfaceprop" "BloodyFlesh"
+	"$alphatest" 1
+	"$nolod" 1
+}
