@@ -27,6 +27,15 @@ function ENT:CustomOnThink()
 				if self.Stronger == true then 
 			    self:SetKeyValue("rendercolor","255 155 0 255")
 				end
+				if self.Regen == true then 
+			    self:SetKeyValue("rendercolor","155 155 255 255")
+				end
+				if self.Toxic == true then 
+			    self:SetKeyValue("rendercolor","255 155 255 255")
+				end
+				if self.Stalker == true then 
+			    self:SetKeyValue("rendercolor","50 50 50 255")
+				end
     end 
 	end)
 	end
@@ -46,5 +55,14 @@ function ENT:CustomOnDeath_BeforeCorpseSpawned(dmginfo, hitgroup)
 				end
 				if self.Stronger == true then 
 			    self:SetKeyValue("rendercolor","255 155 0 255")
+				end
+							if self.Regen == true then 
+			    self:SetKeyValue("rendercolor","155 155 255 255")
+				end
+				if self.Toxic == true then 
+			    self:SetKeyValue("rendercolor","255 155 255 255")
+				end
+				if self.Stalker == true then 
+			    self:SetKeyValue("rendercolor","50 50 50 255")
 				end
 end

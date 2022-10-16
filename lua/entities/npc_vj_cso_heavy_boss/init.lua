@@ -4,7 +4,7 @@ include('shared.lua')
 ENT.Model = {"models/vj_cso/mobs/heavy_boss.mdl"}
 ENT.StartHealth = GetConVarNumber("vj_cso_juggernaut_hp")
 ENT.HullType = HULL_LARGE 
-
+ENT.VJ_IsHugeMonster = true
 
 ENT.AnimTbl_MeleeAttack = {"vjseq_zbs_attack"}
 ENT.MeleeAttackDamage = math.random(25,40)

@@ -84,6 +84,10 @@ if VJExists == true then
 	VJ.AddNPC("Stamper", "npc_vj_cso_undertaker", vCat)
 	VJ.AddNPC("Stamper Origin", "npc_vj_cso_undertaker_origin", vCat)
 	
+	-- Other --
+	
+	VJ.AddNPC("Hound", "npc_vj_cso_zombiedog", vCat)
+
 	-- Bosses --
 	
 	VJ.AddNPC("Juggernaut", "npc_vj_cso_heavy_boss", vCat)
@@ -109,6 +113,7 @@ if VJExists == true then
 	AddConvars["vj_cso_regen_enable"] = 1
 	AddConvars["vj_cso_toxic_enable"] = 1
 	AddConvars["vj_cso_stalker_enable"] = 1
+	AddConvars["vj_cso_infection_enable"] = 1
 	AddConvars["vj_cso_origin_hp"] = 1.75
 	AddConvars["vj_cso_thrower_hp"] = 0.75
 	AddConvars["vj_cso_stronger_hp"] = 2
@@ -127,6 +132,7 @@ if VJExists == true then
 	AddConvars["vj_cso_deimos_hp"] = 800
 	AddConvars["vj_cso_juggernaut_hp"] = 3500
 	AddConvars["vj_cso_ganymede_hp"] = 3000
+	AddConvars["vj_cso_zombiedog_hp"] = 150
 	
     -- Config menu --
 
@@ -151,13 +157,14 @@ if VJExists == true then
 			vj_cso_walker_chance = "5",
 			vj_cso_regen_chance = "10",
 			vj_cso_toxic_chance = "10",
-			vj_cso_stalker_chance = "1",
+			vj_cso_stalker_chance = "10",
 			vj_cso_thrower_enable = "1",
 			vj_cso_stronger_enable = "1",
 			vj_cso_walker_enable = "1",
 			vj_cso_regen_enable = "1",
 			vj_cso_toxic_enable = "1",
 			vj_cso_stalker_enable = "1",
+			vj_cso_infection_enable = "1",
 			vj_cso_origin_hp = "1.75",
 			vj_cso_thrower_hp = "0.75",
 			vj_cso_stronger_hp = "2",
@@ -176,6 +183,7 @@ if VJExists == true then
 			vj_cso_deimos_hp = "800",
 			vj_cso_juggernaut_hp = "4000",
 			vj_cso_ganymede_hp = "3000",
+			vj_cso_zombiedog_hp = "150",
 			}
 		
 	Panel:AddControl("ComboBox", vj_resetbutton)
@@ -198,6 +206,9 @@ if VJExists == true then
 	Panel:AddControl("Checkbox", {Label = "Zombies can spawn as Stalker?", Command = "vj_cso_stalker_enable"})
 	Panel:ControlHelp("Stalkers are harder to see.")
 --]]
+
+	Panel:AddControl("Checkbox", {Label = "Enable Infection?", Command = "vj_cso_infection_enable"})
+	Panel:ControlHelp("NPCs and players killed by zombies will turn into zombies.")
 	
 	Panel:AddControl("Slider", {Label = "Walker chance", Command = "vj_cso_walker_chance", Min = 0, Max = 100})
 	Panel:ControlHelp("Example: Setting it to 5 will make it a 1 in 5 chance.")
@@ -278,6 +289,9 @@ if VJExists == true then
 	Panel:AddControl("Slider", {Label = "Deimos HP.", Command = "vj_cso_deimos_hp", Min = 1, Max = 10000})
 	Panel:ControlHelp("Default amount is 800.")
 	
+	Panel:AddControl("Slider", {Label = "Hound HP.", Command = "vj_cso_zombiedog_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 150.")	
+	
 	Panel:AddControl("Slider", {Label = "Juggernaut HP.", Command = "vj_cso_juggernaut_hp", Min = 1, Max = 10000})
 	Panel:ControlHelp("Default amount is 4000.")
 
@@ -308,6 +322,145 @@ if VJExists == true then
 	end
 		hook.Add("PopulateToolMenu","VJ_AddToMenu_CSO", VJ_AddToMenu_CSO )
 	end
+	
+-------------------------------------------------------------------------------------------------------------------------
+	local NPC = FindMetaTable("NPC")
+	local ENT = FindMetaTable("Entity")
+	local Phys = FindMetaTable("PhysObj")
+	
+	function ENT:AdjustBones(tbl,alter)
+		local ang = false
+		if type(alter) == "Angle" then
+			ang = true
+		end
+		for _,v in pairs(tbl) do
+			local boneid = self:LookupBone(v)
+			if boneid && boneid > 0 then
+				if ang == false then
+					self:ManipulateBonePosition(boneid,alter)
+				else
+					self:ManipulateBoneAngles(boneid,alter)
+				end
+			end
+		end
+	end
+
+hook.Add("OnNPCKilled","CSO_Infection_NPC",function(victim,inflictor,attacker)
+      if attacker.CSO_Infection == true && victim:LookupBone("ValveBiped.Bip01_Pelvis") then
+      local zombie = ents.Create("npc_vj_cso_inf_regular")
+	  local oldModel = victim:GetModel()
+	  local oldSkin = victim:GetSkin()
+	  local oldColor = victim:GetColor()
+	  local oldMaterial = victim:GetMaterial()	  
+	  local bg = {}
+	  for i = 0,18 do
+		bg[i] = victim:GetBodygroup(i)
+end	  
+			zombie:SetMaterial("hud/killicons/default")
+            zombie:SetPos(victim:GetPos())
+            zombie:SetAngles(victim:GetAngles())
+            zombie:Spawn()
+			zombie:Activate()
+            //zombie:SetParent(zombie)
+            zombie:Spawn()
+            zombie:VJ_CSOCreateBoneMerge(zombie,oldModel,oldSkin,bg)
+		
+           if victim.IsVJBaseSNPC == true then
+                victim.HasDeathRagdoll = false
+                victim.HasDeathAnimation = false				
+end								
+		   if victim:IsNPC() then
+				victim:Remove()				
+        end						
+    end			
+end)				
+
+hook.Add("PlayerDeath","CSO_Infection_Player",function(victim,inflictor,attacker)
+      if attacker.CSO_Infection == true && victim:LookupBone("ValveBiped.Bip01_Pelvis") then
+      local zombie = ents.Create("npc_vj_cso_inf_regular")
+	  local bonemerge = ents.Create("vj_cso_infection")
+	  local oldModel = victim:GetModel()
+	  local oldSkin = victim:GetSkin()
+	  local oldColor = victim:GetColor()
+	  local oldMaterial = victim:GetMaterial()		  
+	  local oldPlayerColor = victim:GetPlayerColor() 	  
+	  local bg = {}
+	  for i = 0,18 do
+		bg[i] = victim:GetBodygroup(i)
+end	 	  
+
+			zombie:SetMaterial("hud/killicons/default")
+            zombie:SetPos(victim:GetPos())
+            zombie:SetAngles(victim:GetAngles())
+            zombie:Spawn()
+			zombie:Activate()
+            //zombie:SetParent(zombie)
+            zombie:Spawn()
+
+			local creator = NULL
+			if zombie:IsNPC() then
+				creator = IsValid(zombie:GetCreator()) && zombie:GetCreator()
+				zombie:SetCollisionBounds(Vector(13,13,72),Vector(-13,-13,0))
+end
+			local body = ents.Create("vj_cso_infection")
+			body:SetModel(oldModel)
+			body:SetPos(zombie:GetPos())
+			body:SetAngles(zombie:GetAngles())
+			body.VJ_Owner = zombie
+			body:Spawn()
+			body:SetParent(zombie)
+			body:SetSkin(oldSkin)
+			body:SetColor(oldColor)
+			body:SetPlayerColor(oldPlayerColor)
+			body:SetMaterial(oldMaterial)		
+			if bg then
+				for i = 0,18 do
+				body:SetBodygroup(i,bg[i])			
+    end			
+end
+			zombie.Bonemerge = body
+			zombie.BonemergeModel = oldModel	
+			
+         if victim:IsPlayer() then
+				if IsValid(victim:GetRagdollEntity()) then
+					victim:GetRagdollEntity():Remove()
+                end				
+           end 
+      end	
+end)
+		function ENT:VJ_CSOCreateBoneMerge(targEnt,oldModel,oldSkin,bg)
+			local creator = NULL
+			if targEnt:IsNPC() then
+				creator = IsValid(targEnt:GetCreator()) && targEnt:GetCreator()
+				targEnt:SetCollisionBounds(Vector(13,13,72),Vector(-13,-13,0))
+end
+			local body = ents.Create("vj_cso_infection")
+			body:SetModel(oldModel)
+			body:SetPos(targEnt:GetPos())
+			body:SetAngles(targEnt:GetAngles())
+			body.VJ_Owner = targEnt
+			body:Spawn()
+			body:SetParent(targEnt)
+			body:SetSkin(oldSkin)
+			body:SetColor(oldColor)
+			body:SetMaterial(oldMaterial)		
+			if bg then
+				for i = 0,18 do
+				body:SetBodygroup(i,bg[i])
+    end			
+end
+			targEnt.Bonemerge = body
+			targEnt.BonemergeModel = oldModel						
+end
+
+-------------------------------------------------------------------------------------------------------------------------
+VJ_CSO_NODEPOS = {}
+	hook.Add("EntityRemoved","VJ_CSO_AddNodes",function(ent)
+		if ent:GetClass() == "info_node" then
+			table.insert(VJ_CSO_NODEPOS,ent:GetPos())	
+	end
+end)
+
 -- !!!!!! DON'T TOUCH ANYTHING BELOW THIS !!!!!! -------------------------------------------------------------------------------------------------------------------------
 	AddCSLuaFile(AutorunFile)
 	VJ.AddAddonProperty(AddonName,AddonType)

@@ -22,7 +22,7 @@ ENT.RangeAttackPos_Right = 6
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnThink()
-    if IsValid(self:GetEnemy()) && self.Shockwave == false && self.VJ_IsBeingControlled == false && CurTime() > self.NextShockwave && self:GetPos():Distance(self:GetEnemy():GetPos()) < 150 && (self:Health() > (0)) then
+    if IsValid(self:GetEnemy()) && self.Shockwave == false && self.VJ_IsBeingControlled == false && CurTime() > self.NextShockwave && self:GetPos():Distance(self:GetEnemy():GetPos()) < 250 && (self:Health() > (0)) then
 		        self.Shockwave = true 
 				self:Skill()
 				timer.Simple(1,function() if IsValid(self) then

@@ -13,6 +13,8 @@ ENT.Toxic = false
 ENT.Stalker = false
 ENT.Origin = false
 
+ENT.CSO_Infection = true
+
 ENT.AnimTbl_IdleStand = {ACT_IDLE}
 ENT.AnimTbl_Walk = {ACT_WALK}
 ENT.AnimTbl_Run = {ACT_RUN}
@@ -190,7 +192,7 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 		VJ_EmitSound(self, "physics/body/body_medium_impact_hard"..math.random(1,6)..".wav", 70, 100)
 	end
 	if key == "melee" then
-		self:MeleeAttackCode()		
+		self:MeleeAttackCode()	
     end		
 	if key == "range" then
 		self:RangeAttackCode()		

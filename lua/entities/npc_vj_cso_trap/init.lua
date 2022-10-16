@@ -11,12 +11,12 @@ ENT.MeleeAttackAnimationFaceEnemy  = false
 ENT.MeleeAttackDamage = 10
 ENT.MeleeAttackDamageType = DMG_SLASH
 ENT.SlowPlayerOnMeleeAttack = true
-ENT.SlowPlayerOnMeleeAttack_WalkSpeed = 0
-ENT.SlowPlayerOnMeleeAttack_RunSpeed = 0
+ENT.SlowPlayerOnMeleeAttack_WalkSpeed = 1
+ENT.SlowPlayerOnMeleeAttack_RunSpeed = 1
 ENT.SlowPlayerOnMeleeAttackTime = 3
-ENT.MeleeAttackDistance = 10
+ENT.MeleeAttackDistance = 20
 ENT.MeleeAttackAngleRadius = 180
-ENT.MeleeAttackDamageDistance = 20
+ENT.MeleeAttackDamageDistance = 30
 ENT.MeleeAttackDamageAngleRadius = 180
 ENT.TimeUntilMeleeAttackDamage = 0.4
 

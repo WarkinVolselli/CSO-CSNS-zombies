@@ -61,11 +61,11 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Skill()
-	effects.BeamRingPoint(self:GetPos(), 0.5, 4, 600, 32, 0, Color(255, 200, 0), {material="VJ_Base/sprites/vj_trial1", framerate=20})
-	effects.BeamRingPoint(self:GetPos(), 0.5, 4, 300, 32, 0, Color(255, 0, 0), {material="VJ_Base/sprites/vj_trial1", framerate=20})
+	effects.BeamRingPoint(self:GetPos(), 0.5, 4, 800, 32, 0, Color(255, 200, 0), {material="VJ_Base/sprites/vj_trial1", framerate=20})
+	effects.BeamRingPoint(self:GetPos(), 0.5, 4, 400, 32, 0, Color(255, 0, 0), {material="VJ_Base/sprites/vj_trial1", framerate=20})
 	
 	VJ_EmitSound(self,"vj_cso/td_stun.wav",100,math.random(90,100))
 	
-	util.VJ_SphereDamage(self, self, self:GetPos(), 200, math.random(20,30), DMG_SONIC, true, true, {DisableVisibilityCheck=true, Force=80})
+	util.VJ_SphereDamage(self, self, self:GetPos(), 300, math.random(10,20), DMG_SONIC, true, true, {DisableVisibilityCheck=true, Force=80})
 		util.ScreenShake(self:GetPos(),16,300,0.5,500) 
 end

@@ -24,7 +24,8 @@ local ent_tbl = {
 	"npc_vj_cso_deimos:16",
 	"npc_vj_cso_deimos_origin:32",
 	"npc_vj_cso_undertaker:4",
-	"npc_vj_cso_undertaker_origin:7"
+	"npc_vj_cso_undertaker_origin:7",
+	"npc_vj_cso_zombiedog:4"
 }
 ENT.EntitiesToSpawn = {
 	{EntityName = "NPC1",SpawnPosition = {vForward=0,vRight=0,vUp=0},Entities = ent_tbl},
