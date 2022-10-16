@@ -4,6 +4,7 @@ include('shared.lua')
 ENT.Model = {"models/vj_cso/mobs/regular.mdl"}
 ENT.StartHealth = 100
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
+ENT.HasDeathRagdoll = false
 
 ENT.Walker = false
 ENT.Thrower = false
