@@ -207,7 +207,7 @@ if self.Origin == true then
 self.StartHealth = self.StartHealth * 1.75
 end
 
-if math.random(1,GetConVar("vj_cso_walker_chance"):GetInt()) == 1 then
+if math.random(1,GetConVar("vj_cso_walker_chance"):GetInt()) == 1 && self:GetClass() != "npc_vj_cso_zombiedog" && self:GetClass() != "npc_vj_cso_zombiedog_origin" then
 self.Walker = true
 --self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_walker_hp")
 self.StartHealth = self.StartHealth * 2
@@ -215,7 +215,7 @@ self.AnimTbl_Walk = {ACT_WALK}
 self.AnimTbl_Run = {ACT_WALK}
 end
 
-if math.random(1,GetConVar("vj_cso_thrower_chance"):GetInt()) == 1 && self.Stronger == false && self.Regen == false && self.Toxic == false && self.Stalker == false then
+if math.random(1,GetConVar("vj_cso_thrower_chance"):GetInt()) == 1 && self.Stronger == false && self.Regen == false && self.Toxic == false && self.Stalker == false && self:GetClass() != "npc_vj_cso_zombiedog" && self:GetClass() != "npc_vj_cso_zombiedog_origin"  then
 self.Thrower = true 
 self:SetKeyValue("rendercolor","155 255 155 255")
 --self.StartHealth = self.StartHealth * GetConVarNumber("vj_cso_thrower_hp")
