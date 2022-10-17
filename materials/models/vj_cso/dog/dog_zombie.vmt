@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/vj_cso/dog/dog_zombie"
+	"$bumpmap" "models/vj_cso/dog/dog_zombie_normal"
+	"$alphatest" 1
+	"$vertexcolor" 1
+}
