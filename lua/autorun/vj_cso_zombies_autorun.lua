@@ -87,6 +87,7 @@ if VJExists == true then
 	-- Other --
 	
 	VJ.AddNPC("Hound", "npc_vj_cso_zombiedog", vCat)
+	VJ.AddNPC("Hound Origin", "npc_vj_cso_zombiedog_origin", vCat)
 
 	-- Bosses --
 	
@@ -132,7 +133,7 @@ if VJExists == true then
 	AddConvars["vj_cso_deimos_hp"] = 800
 	AddConvars["vj_cso_juggernaut_hp"] = 3500
 	AddConvars["vj_cso_ganymede_hp"] = 3000
-	AddConvars["vj_cso_zombiedog_hp"] = 150
+	AddConvars["vj_cso_zombiedog_hp"] = 100
 	
     -- Config menu --
 
@@ -183,7 +184,7 @@ if VJExists == true then
 			vj_cso_deimos_hp = "800",
 			vj_cso_juggernaut_hp = "4000",
 			vj_cso_ganymede_hp = "3000",
-			vj_cso_zombiedog_hp = "150",
+			vj_cso_zombiedog_hp = "100",
 			}
 		
 	Panel:AddControl("ComboBox", vj_resetbutton)
@@ -290,7 +291,7 @@ if VJExists == true then
 	Panel:ControlHelp("Default amount is 800.")
 	
 	Panel:AddControl("Slider", {Label = "Hound HP.", Command = "vj_cso_zombiedog_hp", Min = 1, Max = 10000})
-	Panel:ControlHelp("Default amount is 150.")	
+	Panel:ControlHelp("Default amount is 100.")	
 	
 	Panel:AddControl("Slider", {Label = "Juggernaut HP.", Command = "vj_cso_juggernaut_hp", Min = 1, Max = 10000})
 	Panel:ControlHelp("Default amount is 4000.")
