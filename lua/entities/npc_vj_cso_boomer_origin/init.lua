@@ -9,6 +9,7 @@ ENT.NextBerserk = 0
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnThink()
+    ParticleEffectAttach("antlion_spit_03",PATTACH_POINT_FOLLOW,self,self:LookupAttachment("origin"))
     if IsValid(self:GetEnemy()) && math.random(1,50) == 1 && self.Berserk == false && self.VJ_IsBeingControlled == false && CurTime() > self.NextBerserk && (self:Health() > (0)) then
 		        self.Berserk = true 
 				self.AnimTbl_Run = {ACT_RUN_AGITATED}
