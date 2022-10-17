@@ -1,0 +1,8 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/vj_cso/titan/Tip1"
+	"$bumpmap" "models/vj_cso/titan/Tip1_normal"
+	"$surfaceprop" "grenade"
+	"$alphatest" 1
+	"$vertexcolor" 1
+}
