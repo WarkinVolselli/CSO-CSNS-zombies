@@ -4,6 +4,7 @@ include('shared.lua')
 ENT.Model = {"models/vj_cso/mobs/zombiedog.mdl"}
 ENT.StartHealth = GetConVarNumber("vj_cso_zombiedog_hp")
 ENT.MeleeAttackDamage = math.random(10,20)
+ENT.HullType = HULL_TINY
 
 ENT.MeleeAttackDistance = 60
 ENT.MeleeAttackDamageDistance = 70
