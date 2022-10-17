@@ -55,7 +55,7 @@ if VJExists == true then
 	
 	local vCat = "Counter Strike Online: Zombies" -- Category, you can also set a category individually by replacing the vCat with a string value
 		
-	-- NPCs --
+	-- Zombies --
 	
 	VJ.AddNPC("Regular", "npc_vj_cso_regular", vCat)
 	VJ.AddNPC("Regular Origin", "npc_vj_cso_regular_origin", vCat)
@@ -89,10 +89,14 @@ if VJExists == true then
 	VJ.AddNPC("Hound", "npc_vj_cso_zombiedog", vCat)
 	VJ.AddNPC("Hound Origin", "npc_vj_cso_zombiedog_origin", vCat)
 
-	-- Bosses --
+	-- Mini-Bosses --
 	
 	VJ.AddNPC("Juggernaut", "npc_vj_cso_heavy_boss", vCat)
 	VJ.AddNPC("Ganymede", "npc_vj_cso_deimos_boss", vCat)
+	
+	-- Bosses --
+	
+	VJ.AddNPC("Fallen Titan", "npc_vj_cso_titan", vCat)	
 	
     -- Spawners --
 
@@ -133,6 +137,7 @@ if VJExists == true then
 	AddConvars["vj_cso_deimos_hp"] = 800
 	AddConvars["vj_cso_juggernaut_hp"] = 3500
 	AddConvars["vj_cso_ganymede_hp"] = 3000
+	AddConvars["vj_cso_titan_hp"] = 10000
 	AddConvars["vj_cso_zombiedog_hp"] = 100
 	
     -- Config menu --
@@ -184,6 +189,7 @@ if VJExists == true then
 			vj_cso_deimos_hp = "800",
 			vj_cso_juggernaut_hp = "4000",
 			vj_cso_ganymede_hp = "3000",
+			vj_cso_titan_hp = "10000",
 			vj_cso_zombiedog_hp = "100",
 			}
 		
@@ -277,7 +283,7 @@ if VJExists == true then
 	
 	Panel:AddControl("Slider", {Label = "Voodoo Healer HP.", Command = "vj_cso_voodoo_hp", Min = 1, Max = 10000})
 	Panel:ControlHelp("Default amount is 150.")
-	
+	                                                                                                       
 	Panel:AddControl("Slider", {Label = "Venom Stinger HP.", Command = "vj_cso_resident_hp", Min = 1, Max = 10000})
 	Panel:ControlHelp("Default amount is 200.")
 	
@@ -298,6 +304,9 @@ if VJExists == true then
 
 	Panel:AddControl("Slider", {Label = "Ganymede HP.", Command = "vj_cso_ganymede_hp", Min = 1, Max = 10000})
 	Panel:ControlHelp("Default amount is 3000.")	
+	
+	Panel:AddControl("Slider", {Label = "Titan HP.", Command = "vj_cso_titan_hp", Min = 1, Max = 10000})
+	Panel:ControlHelp("Default amount is 10000.")	
 	
 	/*
 	examples

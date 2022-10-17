@@ -2,8 +2,7 @@ AddCSLuaFile("shared.lua")
 include('shared.lua')
 
 ENT.Model = {"models/vj_cso/misc/zombitrap.mdl"}
-ENT.StartHealth = 1000
-
+ENT.GodMode = true
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
 ENT.SoundTbl_MeleeAttack = {"vj_cso/zombi_trapped.wav"}
 
