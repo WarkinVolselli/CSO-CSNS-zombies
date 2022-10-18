@@ -27,8 +27,8 @@ ENT.RangeAttackAnimationStopMovement = true
 ENT.RangeDistance = 3000
 ENT.RangeToMeleeDistance = 1000
 ENT.TimeUntilRangeAttackProjectileRelease = false
-ENT.NextRangeAttackTime = 15
-ENT.NextRangeAttackTime_DoRand = 30
+ENT.NextRangeAttackTime = 10
+ENT.NextRangeAttackTime_DoRand = 20
 ENT.RangeUseAttachmentForPos = true
 ENT.RangeUseAttachmentForPosID = "cannon"
 
@@ -62,7 +62,11 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	end
 	if key == "slam" then
 	    VJ_EmitSound(self, "vj_cso/titan/zbs_cannon_start.wav", 90, 100)
+		  timer.Simple(0.1,function() if IsValid(self) then
+    ParticleEffectAttach("door_pound_core",PATTACH_POINT_FOLLOW,self,self:LookupAttachment("arm"))
 		util.ScreenShake(self:GetPos(),32,900,1,800) 
+		end
+		end)
 	end
 	if key == "dash" then
 
@@ -74,11 +78,16 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
     end		
 	if key == "range" then
 	    VJ_EmitSound(self, "vj_cso/titan/zbs_cannon1.wav", 90, 100)
+    ParticleEffectAttach("fire_medium_01",PATTACH_POINT_FOLLOW,self,self:LookupAttachment("cannon"))
+	  timer.Simple(0.25,function() if IsValid(self) then
+			    self:StopParticles()
+  end 
+	end)
 		util.ScreenShake(self:GetPos(),32,1200,2,1100) 
 		self:RangeAttackCode()		
     end	
 	if key == "bomb" then
-	    self.NextBomb = CurTime() + math.random(15,30)
+	    self.NextBomb = CurTime() + math.random(10,20)
 		self.Bomb = false
 	    VJ_EmitSound(self, "vj_cso/titan/zbs_landmine1.wav", 90, 100)
 		util.ScreenShake(self:GetPos(),32,1200,2,1100) 
